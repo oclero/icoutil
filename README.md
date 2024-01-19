@@ -1,10 +1,10 @@
-# Icoutil
+# IcoUtil
 
 [![python](https://img.shields.io/badge/Python-3.9-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](https://mit-license.org/)
 [![PyPi version](https://badgen.net/pypi/v/pip/)](https://pypi.org/project/icoutil)
 
-A simple Python library to create .ICO files (Windows icon file format).
+A simple Python library to create `.ico` files (Windows icon file format) from `.png` files.
 
 **Table of contents**
 
@@ -12,12 +12,13 @@ A simple Python library to create .ICO files (Windows icon file format).
 - [Usage](#usage)
   - [As a library](#as-a-library)
   - [As a CLI program](#as-a-cli-program)
+- [Remarks](#remarks)
 - [Creator](#creator)
 - [License](#license)
 
 ## Install
 
-Use the PyPi.org index:
+Use the [PyPi.org](https://pypi.org/project/icoutil) package index:
 
 ```sh
 pip3 install icoutil
@@ -29,7 +30,7 @@ pip3 install icoutil
 
 Two ways to use the library:
 
-- Creating a `.ico` file from a single directory that contains multiple PNG files
+- Creating a `.ico` file from a single directory that contains multiple `.png` files:
 
   ```py
   import icoutil
@@ -39,7 +40,7 @@ Two ways to use the library:
   ico.write('output.ico')
   ```
 
-- Creating a `.ico` file from multiple PNG files:
+- Creating a `.ico` file from multiple `.png` files:
 
   ```py
   import icoutil
@@ -56,17 +57,34 @@ Two ways to use the library:
 
 Two ways to use the CLI:
 
-- Creating a `.ico` file from a single directory that contains multiple PNG files
+- Creating a `.ico` file from a single directory that contains multiple `.png` files:
 
   ```sh
   icoutil --output "icon.io" "path/to/dir"
   ```
 
-- Creating a `.ico` file from multiple PNG files:
+- Creating a `.ico` file from multiple `.png` files:
 
   ```sh
   icoutil --output "icon.io" "path/to/image1.png" "path/to/image2.png" "path/to/image3.png" ...
   ```
+
+## Remarks
+
+- The file specification can be read [here](<https://en.wikipedia.org/wiki/ICO_(file_format)>).
+- The following sizes are used by Windows, but not all required:
+  - 16×16
+  - 20×20
+  - 24×24
+  - 32×32
+  - 40×40
+  - 48×48
+  - 64×64
+  - 96×96
+  - 128×128
+  - 256×256
+- This library won't consider sizes outside the ones specified above.
+- The maximum allowed size is 256×256 pixels.
 
 ## Creator
 
