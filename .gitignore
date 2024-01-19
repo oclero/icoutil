@@ -1,3 +1,26 @@
+# OS-specific files
+.DS_Store
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+desktop.ini
+*~
+*.swp
+~`~*
+
+# Temporary files
+tmp/
+temp/
+
+# VS Code files.
+.cproject
+.project
+.settings
+.csettings
+.vscode/
+.qt_for_python/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

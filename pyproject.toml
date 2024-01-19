@@ -1,0 +1,28 @@
+[project]
+name = "icoutil"
+version = "1.0.0"
+authors = [{ name = "Olivier Cléro", email = "oclero@protonmail.com" }]
+description = "Simple Python library to create .ICO files (Windows icon file format)."
+readme = "README.md"
+requires-python = ">=3"
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Developers",
+  "Topic :: Software Development :: Build Tools",
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+]
+dependencies = ["pillow"]
+license = { text = "MIT License" }
+keywords = ["windows", "icon", ".ico"]
+
+[project.urls]
+Homepage = "https://github.com/oclero/icoutil"
+Issues = "https://github.com/oclero/icoutil/issues"
+Repository = "https://github.com/oclero/icoutil.git"
+Changelog = "https://github.com/oclero/icoutil/blob/master/CHANGELOG.md"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
