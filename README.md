@@ -1,3 +1,9 @@
+<div align="center">
+<a href="https://github.com/oclero/icoutil">
+	<img style="margin-bottom: 2em; width: 640px" src="thumbnail.png">
+</a>
+</div>
+
 # IcoUtil
 
 [![python](https://img.shields.io/badge/Python-3.9-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
