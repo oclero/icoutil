@@ -12,6 +12,8 @@ desktop.ini
 # Temporary files
 tmp/
 temp/
+tmp.py
+temp.py
 
 # VS Code files.
 .cproject

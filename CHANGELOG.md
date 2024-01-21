@@ -5,3 +5,4 @@
 - Library and command-line program.
 - Converts a directory containing PNGs into an ICO file.
 - Converts a list of PNGs into an ICO file.
+- Basic unit tests for the IcoFile class.

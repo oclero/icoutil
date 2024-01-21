@@ -30,7 +30,7 @@ class IcoFile:
   '''
 
   # Enable/disable verbose output to console (class-wide).
-  verbose: bool = True
+  verbose: bool = False
 
   def __init__(self):
     '''
@@ -76,6 +76,9 @@ class IcoFile:
     '''
     Adds a PNG file.
     '''
+    # Check if the file exists.
+    if not os.path.exists(path):
+      raise Exception(f'This file does not exist: "{path}"')
 
     # Check if the file is a PNG image.
     _, extension = os.path.splitext(path)
@@ -103,7 +106,7 @@ class IcoFile:
 
     # (Verbose): Print.
     if IcoFile.verbose:
-      print(f'Added: "{path}"')
+      print(f'Added {image.size}: "{path}"')
 
   def remove_size(self, size: Size) -> None:
     '''
@@ -111,8 +114,9 @@ class IcoFile:
     '''
     if size in self.size_map:
       del self.size_map[size]
+      print(f'Removed size: {size}')
     elif IcoFile.verbose:
-      print(f'Size {size} not present')
+      print(f'Size {size} not present: cannot remove')
 
   def remove_png(self, path: str) -> None:
     '''
@@ -121,6 +125,7 @@ class IcoFile:
     for size, value in self.size_map.items():
       if value.filename == path:  # type: ignore
         del self.size_map[size]
+        print(f'Removed: "{path}"')
         return
 
     if IcoFile.verbose:
@@ -143,12 +148,6 @@ class IcoFile:
       raise Exception(
         f"At least one PNG must be present. The icon can't be empty.")
 
-    # (Verbose) Print missing sizes.
-    missing_sizes = self.get_missing_sizes()
-    if len(missing_sizes) > 0:
-      missing_sizes_str = ', '.join(f'({w}, {h})' for w, h in missing_sizes)
-      print(f'Some sizes are missing: {missing_sizes_str}')
-
     # Get binary data.
     data = self.get_ico_file_data()
 
@@ -157,6 +156,14 @@ class IcoFile:
     os.makedirs(output_dir, exist_ok=True)
     with open(path, 'wb') as f:
       f.write(data)
+    if IcoFile.verbose:
+      print(f'Written: "{path}"')
+ # (Verbose) Print missing sizes.
+    if IcoFile.verbose:
+      missing_sizes = self.get_missing_sizes()
+      if len(missing_sizes) > 0:
+        missing_sizes_str = ', '.join(f'({w}, {h})' for w, h in missing_sizes)
+        print(f'[Info] Some sizes we missing: {missing_sizes_str}')
 
   def get_missing_sizes(self) -> list[Size]:
     '''
@@ -206,3 +213,13 @@ class IcoFile:
         data += f.read()
 
     return data
+
+  def get_png_for_size(self, size: Size) -> str | None:
+    '''
+    Gets the image associated to the size in parameter,
+    or None if no image is associtated to this size.
+    '''
+    if size in self.size_map:
+      return self.size_map[size].filename  # type: ignore
+    else:
+      return None

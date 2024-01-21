@@ -2,7 +2,7 @@
 
 [![python](https://img.shields.io/badge/Python-3.9-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](https://mit-license.org/)
-[![PyPi version](https://badgen.net/pypi/v/pip/)](https://pypi.org/project/icoutil)
+[![PyPi version](https://badgen.net/pypi/v/icoutil/)](https://pypi.org/project/icoutil)
 
 A simple Python library to create `.ico` files (Windows icon file format) from `.png` files.
 
