@@ -2,7 +2,9 @@
 '''
 A simple Python library to create .ICO files (Windows icon file format).
 '''
-__version__ = '1.0.0'
+
+import importlib.metadata
+__version__ = importlib.metadata.version(__package__)
 
 from .IcoFile import IcoFile
 from . import IcoFile
