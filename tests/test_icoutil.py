@@ -2,19 +2,20 @@
 
 import os
 import unittest
-import icoutil
+
+from icoutil import IcoFile  # nopep8
 
 TEST_RESOURCES_DIR = os.path.join(
   os.path.dirname(__file__), 'resources')
 
 
 # Enable verbose mode for the lib.
-icoutil.IcoFile.verbose = True
+IcoFile.verbose = True
 
 
 class TestIcoUtil(unittest.TestCase):
   def test_add_valid_image(self):
-    ico = icoutil.IcoFile()
+    ico = IcoFile()
     image_path = os.path.join(
       TEST_RESOURCES_DIR, 'directory/directory_16x16.png')
     success = True
@@ -27,7 +28,7 @@ class TestIcoUtil(unittest.TestCase):
     self.assertEqual(success, True, "Adding an image with a valid size")
 
   def test_add_invalid_image(self):
-    ico = icoutil.IcoFile()
+    ico = IcoFile()
     image_path = os.path.join(
       TEST_RESOURCES_DIR, 'directory/directory_17x17.png')
     success = True
@@ -41,7 +42,7 @@ class TestIcoUtil(unittest.TestCase):
 
   def test_add_already_existing_image(self):
     # Add a first time a 16x16 image.
-    ico = icoutil.IcoFile()
+    ico = IcoFile()
     ico.add_png(os.path.join(TEST_RESOURCES_DIR,
                 'directory/directory_16x16.png'))
     success = True
@@ -58,7 +59,7 @@ class TestIcoUtil(unittest.TestCase):
 
   def test_add_individual_images(self):
     # Get binary data for an icon made from all images in a dir.
-    ico = icoutil.IcoFile()
+    ico = IcoFile()
     test_dir = os.path.join(TEST_RESOURCES_DIR, 'document')
     ico.add_png_dir(test_dir)
     data_1 = ico.get_ico_file_data()
