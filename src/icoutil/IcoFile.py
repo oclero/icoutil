@@ -2,6 +2,7 @@
 
 import os
 from typing import Tuple
+import weakref
 from PIL import Image
 
 # Convenient alias for (width, height).
@@ -32,6 +33,9 @@ class IcoFile:
   # Enable/disable verbose output to console (class-wide).
   verbose: bool = False
 
+  # Enable/disable verbose output to console (class-wide).
+  verbose_level: int = 0
+
   def __init__(self):
     '''
     Constructor.
@@ -39,6 +43,17 @@ class IcoFile:
 
     # Stores a mapping size -> Image.
     self.size_map: dict[Size, Image.Image] = {}
+    self._finalizer = weakref.finalize(
+      self, self._close_files, list(self.size_map.values()))
+
+  def __enter__(self):
+    return self
+
+  def __exit__(self, exc_type, exc_value, traceback):  # type: ignore
+    self.close()
+
+  def __del__(self):
+    self.close()
 
   def __str__(self) -> str:
     '''
@@ -88,12 +103,14 @@ class IcoFile:
     # Check if the PNG image's size is valid.
     image = Image.open(path)
     if not image.size in STANDARD_ICO_SIZES:
+      image.close()
       raise Exception(
         f'This PNG image has an invalid size ({image.size[0]}, {image.size[1]}): {path}')
 
     # Check if the size isn't already taken by another image.
     if image.size in self.size_map:
       other_image = self.size_map[image.size]
+      image.close()
       raise Exception(
         f'The size {image.size} is already taken this image: {other_image.filename}')
 
@@ -124,6 +141,7 @@ class IcoFile:
     '''
     for size, value in self.size_map.items():
       if value.filename == path:  # type: ignore
+        value.close()
         del self.size_map[size]
         print(f'Removed: "{path}"')
         return
@@ -158,7 +176,8 @@ class IcoFile:
       f.write(data)
     if IcoFile.verbose:
       print(f'Written: "{path}"')
- # (Verbose) Print missing sizes.
+
+    # (Verbose) Print missing sizes.
     if IcoFile.verbose:
       missing_sizes = self.get_missing_sizes()
       if len(missing_sizes) > 0:
@@ -223,3 +242,16 @@ class IcoFile:
       return self.size_map[size].filename  # type: ignore
     else:
       return None
+
+  def close(self):
+    '''
+    Closes the file handles.
+    '''
+    IcoFile._close_files(list(self.size_map.values()))
+
+  @staticmethod
+  def _close_files(images: list[Image.Image]):
+    for image in images:
+      if IcoFile.verbose and IcoFile.verbose_level > 0:
+        print(f'Closing file    : "{image.filename}"')  # type: ignore
+      image.close()
