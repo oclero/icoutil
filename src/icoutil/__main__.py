@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from argparse import ArgumentParser
+import argparse
 import os
 from icoutil import IcoFile, __version__
 
@@ -10,15 +11,14 @@ def make_argparser():
   parser = ArgumentParser(description=__doc__)
   parser.add_argument(
       '-v', '--version', action='version', version=f'icoutil v{__version__}')
-
-  parser.add_argument('files', nargs='+', type=str,
-                      help='Input .PNG filenames or directory')
   parser.add_argument('-o', '--output', default='icon.ico',
                       type=str, required=False, help='Output .ICO filename')
   parser.add_argument('-V', '--verbose', action='store_true',
                       help='Enable verbose mode')
-  args = parser.parse_args()
-  return args
+  # parser.add_argument('files', nargs=argparse.REMAINDER, type=str,
+  #                     help='Input .PNG filenames or directory')
+  args, files = parser.parse_known_args()
+  return args, files
 
 
 def create_ico(files: list[str], output_path: str, verbose: bool) -> None:
@@ -37,6 +37,10 @@ def create_ico(files: list[str], output_path: str, verbose: bool) -> None:
   ico.write(output_path)
 
 
+def main():
+  args, files = make_argparser()
+  create_ico(files, os.path.abspath(args.output), args.verbose)
+
+
 if __name__ == '__main__':
-  args = make_argparser()
-  create_ico(args.files[1:], os.path.abspath(args.output), args.verbose)
+  main()

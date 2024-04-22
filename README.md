@@ -66,13 +66,13 @@ Two ways to use the CLI:
 - Creating a `.ico` file from a single directory that contains multiple `.png` files:
 
   ```sh
-  icoutil --output "icon.io" "path/to/dir"
+  icoutil --output "icon.ico" "path/to/dir"
   ```
 
 - Creating a `.ico` file from multiple `.png` files:
 
   ```sh
-  icoutil --output "icon.io" "path/to/image1.png" "path/to/image2.png" "path/to/image3.png" ...
+  icoutil --output "icon.ico" "path/to/image1.png" "path/to/image2.png" "path/to/image3.png" ...
   ```
 
 ## Remarks

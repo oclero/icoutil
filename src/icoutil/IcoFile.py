@@ -95,7 +95,7 @@ class IcoFile:
     if image.size in self.size_map:
       other_image = self.size_map[image.size]
       raise Exception(
-        f'The size {image.size} is already taken this image: {other_image.filename}')  # type: ignore
+        f'The size {image.size} is already taken this image: {other_image.filename}')
 
     # Add the image to the list.
     self.size_map[image.size] = image
@@ -106,7 +106,7 @@ class IcoFile:
 
     # (Verbose): Print.
     if IcoFile.verbose:
-      print(f'Added {image.size}: "{path}"')
+      print(f'Added {str(image.size):<10}: "{path}"')
 
   def remove_size(self, size: Size) -> None:
     '''
