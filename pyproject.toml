@@ -1,6 +1,6 @@
 [project]
 name = "icoutil"
-version = "1.0.0"
+version = "1.0.1"
 authors = [{ name = "Olivier Cléro", email = "oclero@protonmail.com" }]
 description = "Simple Python library to create .ICO files (Windows icon file format)."
 readme = "README.md"

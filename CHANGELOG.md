@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.0.1
+
+- Fix command-line program.
+
 ## v1.0.0
 
 - Library and command-line program.
