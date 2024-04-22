@@ -7,6 +7,9 @@ from PIL import Image
 # Convenient alias for (width, height).
 Size = Tuple[int, int]
 
+# Convenient alias for (x, y).
+Position = Tuple[int, int]
+
 # The .ICO specification does allow any size from 1x1 to 256x256, but Windows
 # needs these sizes.
 STANDARD_ICO_SIZES: list[Size] = [(16, 16),
@@ -19,6 +22,47 @@ STANDARD_ICO_SIZES: list[Size] = [(16, 16),
                                   (96, 96),
                                   (128, 128),
                                   (256, 256)]
+
+# The lib embeds some images to use as templates to generate icons.
+RESOURCES_DIR = os.path.join(
+  os.path.dirname(__file__), 'resources')
+
+
+class ImageBuilderData:
+  '''
+  POD to draw an icon.
+  '''
+
+  def __init__(self):
+    self.logo_path: str = ''
+    self.logo_pos: Position = (0, 0)
+    self.logo_size: Size = (0, 0)
+    self.backgroud_path: str = ''
+    self.foreground_path: str = ''
+    self.text: str = ''
+    self.text_size: int = 0
+    self.text_pos: Position = (0, 0)
+
+
+class IconBuilderData:
+  def __init__(self):
+    self.text = ""
+    self.mapping: dict[Size, ImageBuilderData] = {}
+
+
+def make_iconbuilderdatas(dir_path: str) -> IconBuilderData:
+  # List all PNG
+  # foreach PNG:
+    # read size
+    # add to map
+  return {}
+
+
+BUILTIN_ICONBUILDERDATA: dict[str, IconBuilderData] = {
+  "default": make_iconbuilderdatas(''),
+  "document": make_iconbuilderdatas(os.path.join(RESOURCES_DIR, "document")),
+  "installer": make_iconbuilderdatas(os.path.join(RESOURCES_DIR, "installer")),
+}
 
 
 class IcoFile:
@@ -223,3 +267,17 @@ class IcoFile:
       return self.size_map[size].filename  # type: ignore
     else:
       return None
+
+##########
+
+  def set_png_background_dir(self, path: str) -> None:
+    # todo
+    pass
+
+  def add_png_background(self, path: str, size: Size) -> None:
+    # todo
+    pass
+
+  def set_text(self, path: str) -> None:
+    # todo
+    pass
