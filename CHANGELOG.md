@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.0.2
+
+- Fix image not displaying on [pypi.org](https://pypi.org/project/icoutil).
+
 ## v1.0.1
 
 - Fix command-line program.
