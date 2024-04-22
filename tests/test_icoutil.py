@@ -11,6 +11,7 @@ TEST_RESOURCES_DIR = os.path.join(
 
 # Enable verbose mode for the lib.
 IcoFile.verbose = True
+IcoFile.verbose_level = 1
 
 
 class TestIcoUtil(unittest.TestCase):
@@ -28,7 +29,7 @@ class TestIcoUtil(unittest.TestCase):
     self.assertEqual(success, True, "Adding an image with a valid size")
 
   def test_add_invalid_image(self):
-    ico = IcoFile()
+    ico = IcoFile
     image_path = os.path.join(
       TEST_RESOURCES_DIR, 'directory/directory_17x17.png')
     success = True
@@ -51,6 +52,7 @@ class TestIcoUtil(unittest.TestCase):
       ico.add_png(os.path.join(TEST_RESOURCES_DIR,
                   'document/document_16x16.png'))
     except:
+      ico.close()
       success = False
 
     # It shouldn't be possible to have two images with the same size.

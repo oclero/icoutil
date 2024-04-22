@@ -26,3 +26,6 @@ Changelog = "https://github.com/oclero/icoutil/blob/master/CHANGELOG.md"
 [build-system]
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
+
+[project.scripts]
+icoutil = "icoutil.__main__:main"
