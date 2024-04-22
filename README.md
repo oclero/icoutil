@@ -1,6 +1,6 @@
 <div align="center">
 <a href="https://github.com/oclero/icoutil">
-	<img style="margin-bottom: 2em; width: 640px" src="thumbnail.png">
+	<img style="margin-bottom: 2em; width: 640px" src="https://raw.githubusercontent.com/oclero/icoutil/master/thumbnail.png">
 </a>
 </div>
 
